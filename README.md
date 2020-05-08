@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+npm install  bootstrap-vue bootstrap axios vue-router
 ```
 
 ### Compiles and hot-reloads for development

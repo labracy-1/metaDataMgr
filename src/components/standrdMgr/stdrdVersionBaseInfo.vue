@@ -15,9 +15,9 @@
                     </b-col>
                 </b-row>
                 <b-row>
-                    <b-col cols="4" class="text-right"><b-button pill type="submit" variant="primary">保  存</b-button>
+                    <b-col cols="4" class="text-right"><b-button pill type="submit" variant="primary" v-show="!this.just_read">保  存</b-button>
                     </b-col>
-                    <b-col cols="4" class="text-center"><b-button pill type="reset" variant="danger">重  置</b-button>
+                    <b-col cols="4" class="text-center"><b-button pill type="reset" variant="danger" v-show="!this.just_read">重  置</b-button>
                     </b-col>
                 </b-row>
             </b-container>
@@ -29,6 +29,7 @@ export default {
     name:'stdrdVerBaseInfo',
     props:{
         version_id:String,
+        just_read: Boolean,
     },
     data(){
         return {

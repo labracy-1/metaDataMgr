@@ -12,15 +12,14 @@
 
         <b-tabs content-class="mt-3">
             <b-tab title="标准基本信息" active><standrdBaseInfo :stdrd_id=this.$route.params.std_id></standrdBaseInfo></b-tab>
-            <b-tab title="标准版本信息">
+            <b-tab title="标准版本管理">
                 <versionCtl :verionList=verList :defaultVersion=vctlDefaultVer v-on:versionChange="versionChange" v-on:newStdVer="newStdVersion"></versionCtl>
 
                 <div>
-                <b-alert variant="light" show><h5 class="alert-heading">标准版本 - {{ version_selected }}</h5></b-alert>
-                <b-tabs content-class="mt-3" v-if=version_selected>
+                <b-tabs content-class="mt-3" v-if="version_selected">
                     <b-tab title="版本基本信息" active><stdrdVerBaseInfo :version_id="version_selected" :just_read="this.just_read"></stdrdVerBaseInfo></b-tab>
-                    <b-tab title="标准元素定义"><stdrdItemList :just_read="this.just_read"></stdrdItemList></b-tab>
-                    <b-tab title="字典组定义"><p>字典组定义</p></b-tab>
+                    <b-tab title="版本元素定义"><stdrdItemList :just_read="this.just_read"></stdrdItemList></b-tab>
+                    <b-tab title="版本字典定义"><dictGroupList :just_read="this.just_read"></dictGroupList></b-tab>
                 </b-tabs>
                 </div>
             </b-tab>
@@ -47,13 +46,15 @@ import versionCtl from '../common/versionCtl'
 import standrdBaseInfo from './standrdBaseInfo'
 import stdrdVerBaseInfo from './stdrdVersionBaseInfo'
 import stdrdItemList from './stdrdItemList'
+import dictGroupList from '../common/dictGroupList'
 export default {
     name: 'stdrdDetail',
     components:{
         versionCtl,
         standrdBaseInfo,
         stdrdVerBaseInfo,
-        stdrdItemList
+        stdrdItemList,
+        dictGroupList
     },
     data(){
         return{
@@ -63,7 +64,7 @@ export default {
             stdrd_uuid: null,
             standrd_version_id:'',
             nameState:null,
-            just_read: false,
+            just_read: true,
         }
     },
     methods: {

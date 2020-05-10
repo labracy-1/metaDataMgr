@@ -163,6 +163,7 @@ import Vue from 'vue'
             Vue.set(this.items, this.items.length, this.cur_item)
             this.totalRows+=1
         }
+        this.cur_item.update_time = (new Date()).toLocaleString()
         this.$nextTick(() => {this.$bvModal.hide('modal-stdrd_item')})
       },
       itemEdit(item_obj){

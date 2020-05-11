@@ -39,7 +39,7 @@
 
         <!-- 字典弹出框内容 -->
         <div>
-            <b-modal id="modal_dict_group_info" ok-only centered  size="lg" title="新建一个字典" @ok="handleOk" >
+            <b-modal id="modal_dict_group_info" centered  size="lg" title="新建一个字典" @ok="handleOk" >
             <form ref="form" @submit.stop.prevent="handleSubmit">
                 <b-container fluid>
                     <b-row class="mb-3">
@@ -95,7 +95,7 @@
 
         <!-- 字典项弹出框内容 -->
         <div>
-            <b-modal id="modal_dict_item_info" ok-only centered title="新建一个字典项" @ok="dict_item_handleOk" >
+            <b-modal id="modal_dict_item_info" centered title="新建一个字典项" @ok="dict_item_handleOk" >
             <form ref="form">
                 <b-container fluid>
                     <b-row class="mb-3">

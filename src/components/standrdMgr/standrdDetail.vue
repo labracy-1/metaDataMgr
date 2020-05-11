@@ -28,7 +28,7 @@
         <!-- 弹出框内容 -->
         <div>
             <b-modal id="modal-prevent-closing" ref="modal" title="新建一个标准版本" @ok="handleOk" >
-            <form ref="form" @submit.stop.prevent="handleSubmit">
+            <form ref="form">
                 <b-form-group
                 :state="nameState"
                 label="请输入新的版本编码："
@@ -83,8 +83,22 @@ export default {
             this.$bvModal.show("modal-prevent-closing")
         },
         handleOk(bvModalEvt) {
-        bvModalEvt.preventDefault()
-        this.handleSubmit()
+            bvModalEvt.preventDefault()
+            if (!this.checkFormValidity()) {
+                return
+            }
+
+            this.verList[this.standrd_version_id]='在编辑'
+            this.vctlDefaultVer = this.standrd_version_id
+                
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-prevent-closing')
+            })
+        },
+        checkFormValidity() {
+            const valid = this.standrd_version_id && this.standrd_version_id.length >= 4
+            this.modal_status = valid
+            return valid
         },
         resetModal() {
             this.nameState = null

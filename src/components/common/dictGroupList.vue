@@ -11,20 +11,27 @@
                     <b-pagination size="sm" v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" class="my-0"></b-pagination>
                 </b-col>
                 <b-col cols="1.5" align-self="center" class="my-1 text-center">
-                    <b-button size="sm" pill variant="success" @click="newDictGroup()" v-show="!this.just_read">新建一个字典</b-button>
+                    <b-button size="sm" pill variant="success" @click="newDictGroup()" v-show="!only_read">新建一个字典</b-button>
                 </b-col>
             </b-row>
 
             <b-table small striped hover :fields="dict_group_fields" :items="dictGroupList" :current-page="currentPage" :per-page="perPage">
-
-                <template v-slot:cell(actions)="row" v-if="!this.just_read">   
-                    <b-button pill  size="sm" @click="dictGroupEdit(row.item, row.index, $event.target)" variant="outline-primary">
-                        编  辑
-                    </b-button>
-                    <b-button pill  size="sm" @click="dictGroupDel(row.item, row.index, $event.target)" variant="danger">
-                        删  除
-                    </b-button>
+                <template v-slot:cell(actions)="row"> 
+                        <b-button pill  size="sm" v-if="only_read"
+                        @click="dictGroupEdit(row.item, row.index, $event.target)" variant="outline-primary">
+                            查  看
+                        </b-button>
+                        <b-button pill  size="sm" v-if="!only_read"
+                        @click="dictGroupEdit(row.item, row.index, $event.target)" variant="outline-primary">
+                            编  辑
+                        </b-button>
+                        <b-button pill  size="sm" v-if="!only_read"
+                        @click="dictGroupDel(row.item, row.index, $event.target)" variant="danger">
+                            删  除
+                        </b-button>
                 </template>
+                
+
 
             </b-table>
 
@@ -38,18 +45,18 @@
                     <b-row class="mb-3">
                         <b-col cols="2" align-self="center"><div class="text-right">字典编码：</div></b-col>
                         <b-col cols="3">
-                            <b-form-input size="sm" v-model="cur_dict_group.dictgroup_id" :state="nameState" required></b-form-input>
+                            <b-form-input size="sm" v-model="cur_dict_group.dictgroup_id" :state="nameState" required v-bind:disabled="this.only_read"></b-form-input>
                         </b-col>
                         <b-col cols="2" align-self="center"><div class="text-right">字典名称：</div></b-col>
                         <b-col cols="3">
-                            <b-form-input size="sm" v-model="cur_dict_group.dictgroup_name"></b-form-input>
+                            <b-form-input size="sm" v-model="cur_dict_group.dictgroup_name" v-bind:disabled="this.only_read"></b-form-input>
                         </b-col>
                     </b-row>
                     
                     <b-row class="mb-3">
                         <b-col cols="2" align-self="center"><div class="text-right">备注说明：</div></b-col>
                         <b-col cols="8">
-                            <b-form-textarea size="sm" v-model="cur_dict_group.desc"> </b-form-textarea>
+                            <b-form-textarea size="sm" v-model="cur_dict_group.desc" v-bind:disabled="this.only_read"> </b-form-textarea>
                         </b-col>
                     </b-row>
                 </b-container>
@@ -63,21 +70,21 @@
                         <b-pagination size="sm" v-model="dict_item_currentPage" :total-rows="dict_item_totalRows" :per-page="4" align="fill" class="my-0"></b-pagination>
                     </b-col>
                     <b-col cols="1.5" align-self="center" class="my-1 text-center">
-                        <b-button size="sm" pill variant="success" @click="newDictItem()" v-show="!this.just_read">新建一个字典项</b-button>
+                        <b-button size="sm" pill variant="success" @click="newDictItem()" v-show="!only_read">新建一个字典项</b-button>
                     </b-col>
                 </b-row>
 
                 <b-table small striped hover :fields="dict_item_fields" :items="this.cur_dict_group.dict_items" :current-page="dict_item_currentPage" :per-page="4">
 
-                <template v-slot:cell(actions)="row" v-if="!this.just_read">   
+                <template v-slot:cell(actions)="row" v-if="!only_read">   
                     <b-button pill  size="sm" @click="dictItemEdit(row.item, row.index, $event.target)" variant="outline-primary">
                         编  辑
                     </b-button>
-                    <b-button pill  size="sm" @click="dictItemDel(row.item, row.index, $event.target)" variant="danger">
+                    <b-button pill  size="sm" 
+                    @click="dictItemDel(row.item, row.index, $event.target)" variant="danger">
                         删  除
                     </b-button>
                 </template>
-
             </b-table>
             </b-container>
 
@@ -156,6 +163,11 @@ import Vue from 'vue'
         dict_item_totalRows: 0,
     }
   },
+  computed:{
+      only_read:function(){
+          return this.just_read==true
+      }
+  },
   methods: {
       genNewItem: function(){ // 获取新建标准元素的初始设置
         return  {
@@ -173,7 +185,9 @@ import Vue from 'vue'
       },
       handleOk(bvModalEvt) {
         bvModalEvt.preventDefault()
-        this.handleSubmit()
+        if (!this.just_read)
+            this.handleSubmit()
+        this.$nextTick(() => {this.$bvModal.hide('modal_dict_group_info')})
       },
       checkFormValidity() {
         const valid = this.cur_dict_group.stdrd_item_id.length > 4 && this.cur_dict_group.stdrd_item_type != null
@@ -189,7 +203,6 @@ import Vue from 'vue'
             this.totalRows += 1
         }
         this.cur_dict_group.update_time = (new Date()).toLocaleString()
-        this.$nextTick(() => {this.$bvModal.hide('modal_dict_group_info')})
       },
       dictGroupEdit(item_obj){
           this.cur_dict_group = item_obj
@@ -198,7 +211,7 @@ import Vue from 'vue'
       },
       dictGroupDel(item_obj, index){
           // todo: 将 cur_dict_group 的内容从数据库中删除，然后重新读取数据库内的 items 列表。
-          this.items.splice(index, 1)
+          this.dictGroupList.splice(index, 1)
           this.totalRows -= 1
       },
       newDictItem(){

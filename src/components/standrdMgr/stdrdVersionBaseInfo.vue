@@ -4,13 +4,13 @@
             <b-container fluid>
                 <b-row>
                     <b-col cols="4" class="text-center">
-                        <b-form-group id="label_input-11" label-cols="4" label="版本编码:" label-for="input-11">
-                            <b-form-input id="input-11" v-model="form.stdrd_ver_id" disabled></b-form-input>
+                        <b-form-group id="label_input-stdrd_ver_id" label-cols="4" label="版本编码:" label-for="input-stdrd_ver_id">
+                            <b-form-input id="input-stdrd_ver_id" v-model="form.stdrd_ver_id" disabled></b-form-input>
                         </b-form-group>
                     </b-col>
                     <b-col cols="4" class="text-center">
-                        <b-form-group id="label_input-21" label-cols="4" label="版本标准号:" label-for="input-21">
-                            <b-form-input id="input-21" v-model="form.ver_stdrd_id"></b-form-input>
+                        <b-form-group id="label_input-ver_stdrd_id" label-cols="4" label="版本标准号:" label-for="input-ver_stdrd_id">
+                            <b-form-input id="input-ver_stdrd_id" v-model="form.ver_stdrd_id"></b-form-input>
                         </b-form-group>
                     </b-col>
                 </b-row>

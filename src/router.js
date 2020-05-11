@@ -5,7 +5,8 @@ import VueRouter from "vue-router";
 import Home from './components/home'
 import standrdList from './components/standrdMgr/standrdList'
 import stdrdDetail from './components/standrdMgr/standrdDetail'
-
+import tableList from './components/tableMgr/tableList'
+import tableDetail from './components/tableMgr/tableDetail'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
@@ -25,6 +26,14 @@ export default new VueRouter({
     {
       path: "/stdrdDetail/:std_id",
       component: stdrdDetail
-  },
+    },
+    {
+      path: "/tableList",
+      component: tableList,
+    },
+    {
+      path: "/tableDetail/:table_id",
+      component: tableDetail
+    },
   ]
 })

@@ -89,23 +89,7 @@ export default {
         resetModal() {
             this.nameState = null
         },
-        checkFormValidity() {
-            const valid = this.standrd_version_id && this.standrd_version_id.length >= 4
-            this.nameState = valid
-            return valid
-        },
-        handleSubmit() {
-            if (!this.checkFormValidity()) {
-                return
-            }
-
-            this.verList[this.standrd_version_id]='在编辑'
-            this.vctlDefaultVer = this.standrd_version_id
-                
-            this.$nextTick(() => {
-                this.$bvModal.hide('modal-prevent-closing')
-            })
-        }
+        
     }
 }
 </script>

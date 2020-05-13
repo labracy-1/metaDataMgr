@@ -17,7 +17,9 @@
 
                 <div>
                 <b-tabs content-class="mt-3" v-if="version_selected">
-                    <b-tab title="版本基本信息" active><stdrdVerBaseInfo :version_id="version_selected" :just_read="this.just_read"></stdrdVerBaseInfo></b-tab>
+                    <b-tab title="版本基本信息" active><versionBaseInfo :just_read="this.just_read" :ver_ctl_obj_type="'standrd'" 
+                            :ver_ctl_obj_id=this.$route.params.std_id :sel_version_id="version_selected"></versionBaseInfo>
+                            </b-tab>
                     <b-tab title="版本元素定义"><stdrdItemList :just_read="this.just_read"></stdrdItemList></b-tab>
                     <b-tab title="版本字典定义"><dictGroupList :just_read="this.just_read"></dictGroupList></b-tab>
                 </b-tabs>
@@ -44,15 +46,15 @@
 <script>
 import versionCtl from '../common/versionCtl'
 import standrdBaseInfo from './standrdBaseInfo'
-import stdrdVerBaseInfo from './stdrdVersionBaseInfo'
 import stdrdItemList from './stdrdItemList'
 import dictGroupList from '../common/dictGroupList'
+import versionBaseInfo from '../common/versionBaseInfo'
 export default {
     name: 'stdrdDetail',
     components:{
         versionCtl,
         standrdBaseInfo,
-        stdrdVerBaseInfo,
+        versionBaseInfo,
         stdrdItemList,
         dictGroupList
     },

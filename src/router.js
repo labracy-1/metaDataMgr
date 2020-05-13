@@ -7,6 +7,8 @@ import standrdList from './components/standrdMgr/standrdList'
 import stdrdDetail from './components/standrdMgr/standrdDetail'
 import tableList from './components/tableMgr/tableList'
 import tableDetail from './components/tableMgr/tableDetail'
+import resourceList from './components/resourceDirMgr/resourceList'
+import resourceDetail from './components/resourceDirMgr/resourceDetail'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
@@ -34,6 +36,14 @@ export default new VueRouter({
     {
       path: "/tableDetail/:table_id",
       component: tableDetail
+    },
+    {
+      path: "/resourceList",
+      component: resourceList
+    },
+    {
+      path: "/resourceDetail/:resource_id",
+      component: resourceDetail
     },
   ]
 })

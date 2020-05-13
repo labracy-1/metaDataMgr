@@ -7,7 +7,9 @@
             <b-navbar-nav>
                 <b-nav-item to="/standrd">数据标准管理</b-nav-item>
                 <b-nav-item to="/tableList">数据集定义</b-nav-item>
-                <b-nav-item to="#" disabled>数据资源目录管理</b-nav-item>
+                <b-nav-item to="/resourceList">数据资源管理</b-nav-item>
+                <b-nav-item to="/resourceList" disabled>资源目录管理</b-nav-item>
+                <b-nav-item to="#" disabled>资源权限管理</b-nav-item>
                 <b-nav-item to="#" disabled>数据采集管理</b-nav-item>
                 <b-nav-item to="#" disabled>数据预处理管理</b-nav-item>
                 <b-nav-item to="#" disabled>数据存储管理</b-nav-item>

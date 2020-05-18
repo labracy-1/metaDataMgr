@@ -9,6 +9,7 @@ import tableList from './components/tableMgr/tableList'
 import tableDetail from './components/tableMgr/tableDetail'
 import resourceList from './components/resourceDirMgr/resourceList'
 import resourceDetail from './components/resourceDirMgr/resourceDetail'
+import resDirList from './components/resourceDirMgr/resDirList'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
@@ -44,6 +45,10 @@ export default new VueRouter({
     {
       path: "/resourceDetail/:resource_id",
       component: resourceDetail
+    },
+    {
+      path: "/resDirList",
+      component: resDirList
     },
   ]
 })

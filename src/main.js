@@ -5,7 +5,12 @@ import Common from './components/Common.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.use(BootstrapVue)
+Vue.use(ElementUI)
 
 // 增加全局变量，用于页面跳转时，存储上下文内容
 Vue.prototype.Common = Common;
